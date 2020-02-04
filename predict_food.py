@@ -53,40 +53,6 @@ def predict_image(img):
     preds , acc = predict_10_crop(np.array(img), 0)
     best_pred = collections.Counter(preds).most_common(1)[0][0]
     print(classname[best_pred],"Accuracy: %.2f%%" % (acc*100))
-    plt.suptitle(str(classname[best_pred])+" : Accuracy = %.2f%%" % (acc*100) , color='g')
-    plt.imshow(pic)
-
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues
-                          ):
-    
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=90)
-    plt.yticks(tick_marks, classes)
-
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-
-    print(cm)
-
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-
 
 datagen = ImageDataGenerator(rescale=1./255)
 test_generator = datagen.flow_from_directory(
@@ -99,19 +65,17 @@ test_generator = datagen.flow_from_directory(
 
 #Test Model
 model = load_model('class_food.h5')
-predict = model.predict_generator(test_generator,steps=len(test_generator))
-predicted_class_indices=np.argmax(predict,axis=1)
-classname = (test_generator.class_indices)
-classname = dict((v,k) for k,v in classname.items())
-label_class = []
-for i in range(len(classname)):
-    label_class.append(classname[i])
-#list accurracy-------------------------------------------------------------
+
+file_opject =  open("class_name.txt","r")
+classname = file_opject.read()
+file_opject.close()
+classname = classname.split(",")
+print("classname :",classname[0])
+
 path  = '*.jpg'
+list_img = []
 for img in glob.glob(path):
     pic = cv2.imread(img , cv2.IMREAD_UNCHANGED)
     pic = cv2.resize(pic,(512,512))
     print("IMG : " , img)
-    # plt.imshow(pic)
     predict_image(pic)
-plt.show()
