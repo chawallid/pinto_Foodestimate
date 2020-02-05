@@ -19,6 +19,12 @@ from collections import defaultdict
 BATCH_SIZE = 5
 IMAGE_SIZE = (512,512)
 
+model = load_model('models/class_food.h5')
+file_opject =  open("models/class_name.txt","r")
+classname = file_opject.read()
+file_opject.close()
+classname = classname.split(",")
+
 def center_crop(x, center_crop_size, **kwargs):
     centerw, centerh = x.shape[0]//2, x.shape[1]//2
     halfw, halfh = center_crop_size[0]//2, center_crop_size[1]//2
@@ -49,24 +55,18 @@ def predict_10_crop(img, ix, top_n=5, plot=False, preprocess=True):
     
     return preds , acc1
 
-def predict_image(img):
+def predict_image(img = []):
+
     preds , acc = predict_10_crop(np.array(img), 0)
     best_pred = collections.Counter(preds).most_common(1)[0][0]
     print(classname[best_pred],"Accuracy: %.2f%%" % (acc*100))
 
-#Test Model
-model = load_model('models/class_food.h5')
+    return(classname[best_pred])
 
-file_opject =  open("models/class_name.txt","r")
-classname = file_opject.read()
-file_opject.close()
-classname = classname.split(",")
-print("classname :",classname[0])
-
-path  = '*.jpg'
-list_img = []
-for img in glob.glob(path):
+def predict_food_class(img = ""):
     pic = cv2.imread(img , cv2.IMREAD_UNCHANGED)
-    pic = cv2.resize(pic,(512,512))
-    print("IMG : " , img)
-    predict_image(pic)
+    pic = cv2.resize(pic,(IMAGE_SIZE))
+    class_food = predict_image(pic)
+    return(class_food)
+
+predict_food_class("img\left.jpg")

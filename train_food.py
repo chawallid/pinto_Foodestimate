@@ -82,8 +82,8 @@ test_food = datagen.flow_from_directory(
     batch_size=BATCH_SIZE,
     shuffle=True)
 
-# print(np.arra
-
+classname = (test_food.class_indices)
+print("classname :", classname)
 checkpoint = ModelCheckpoint('models/class_food.h5', verbose=1, monitor='val_accuracy',save_best_only=True, mode='max')
 
 h = model.fit_generator(
@@ -93,7 +93,6 @@ h = model.fit_generator(
     validation_data=validation_food,
     validation_steps=len(validation_food),
     callbacks=[checkpoint])
-
 
 
 plt.plot(h.history['accuracy'])
