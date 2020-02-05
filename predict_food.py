@@ -54,19 +54,10 @@ def predict_image(img):
     best_pred = collections.Counter(preds).most_common(1)[0][0]
     print(classname[best_pred],"Accuracy: %.2f%%" % (acc*100))
 
-datagen = ImageDataGenerator(rescale=1./255)
-test_generator = datagen.flow_from_directory(
-    'food/test',
-    shuffle=True,
-    target_size=IMAGE_SIZE,
-    batch_size=15,
-    color_mode='rgb',
-    class_mode='categorical')
-
 #Test Model
-model = load_model('class_food.h5')
+model = load_model('models/class_food.h5')
 
-file_opject =  open("class_name.txt","r")
+file_opject =  open("models/class_name.txt","r")
 classname = file_opject.read()
 file_opject.close()
 classname = classname.split(",")
