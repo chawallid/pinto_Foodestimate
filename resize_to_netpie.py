@@ -3,7 +3,7 @@ import numpy as np
 def resize_img(path = "",position_img =""):
     TARGET_SIZE = (200,200)
     if(position_img == "center"):
-        TARGET_SIZE = (400,200)
+        TARGET_SIZE = (200,100)
     im = cv2.imread(path)
     im_resized = cv2.resize(im,TARGET_SIZE)
     name_img = position_img+".jpg"

@@ -65,9 +65,8 @@ def disconnect():
 microgear.setalias("a")
 microgear.on_connect = connection
 microgear.on_message = subscription
-microgear.on_disconnect = disconnect
 microgear.subscribe("/mails")
-microgear.connect(False)
+microgear.connect()
 
 #token_firebase
 L = url_L + "&token=28ef2706-806f-4699-afe1-ff737ac9b4da"
@@ -75,6 +74,11 @@ R = url_R + "&token=d28ba572-312b-468e-a234-354b96d14319"
 C = url_C + "&token=0b0a32a9-1a00-43c0-a665-19058365ff14"
 
 while True:
+    # if (microgear.connect()):
     food1 = str(P1) + "," + str(C1)+ "," + str(L1) +"," + str(L)+","+str(P2) + "," + str(C2)+ "," + str(L2) +"," + str(R)+","+str(P3) + "," + str(C3)+ "," + str(L3) +"," + str(C)
     microgear.chat("a",food1)
-    time.sleep(30)
+        # microgear.on_disconnect
+        # break
+    time.sleep(10)
+    microgear.on_disconnect = disconnect
+    break

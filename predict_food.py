@@ -69,4 +69,4 @@ def predict_food_class(img = ""):
     class_food = predict_image(pic)
     return(class_food)
 
-predict_food_class("img\left.jpg")
+# predict_food_class("img\left.jpg")

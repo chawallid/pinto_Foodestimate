@@ -21,7 +21,7 @@ BATCH_SIZE = 5
 MAX_EPOCH = 200
 IMAGE_SIZE = (512,512)
 weight_C = 0
-weight_L = 40
+weight_L = 173
 weight_R = 93
 def convert_np_to_float(n = []):
     new_num = []
@@ -41,13 +41,29 @@ def main_function():
     class_L = pred_class.predict_food_class("img/left.jpg")
     class_R = pred_class.predict_food_class("img/right.jpg")
 
+    class_L = "Fried Noodles"
+    class_R = "Cucumber Soup"   
+
+    # class_C = "empty"
+    # class_L = "empty" 
+    # class_R = "empty"
+
     print("[INFO] Split photo for predict model...")
-    C = pred_weight.predict_model(weight_C,"img/center.jpg",class_C)[0]
-    img_C = "img/center.jpg"
-    L = pred_weight.predict_model(weight_L,"img/left.jpg",class_L)[0]
-    img_L = "img/left.jpg"
-    R = pred_weight.predict_model(weight_R,"img/left.jpg",class_R)[0]
+    if( class_C != "empty"):
+        C = pred_weight.predict_model(weight_C,"img/center.jpg",class_C)[0]
+    else :
+        C = [0,0,0]
+    if( class_L != "empty"):
+        L = pred_weight.predict_model(weight_L,"img/left.jpg",class_L)[0]
+    else :
+        L = [0,0,0]
+    if( class_R != "empty"):
+        R = pred_weight.predict_model(weight_R,"img/right.jpg",class_R)[0]
+    else :
+        R = [0,0,0]
     img_R = "img/right.jpg"
+    img_C = "img/center.jpg" 
+    img_L = "img/left.jpg"
 
     print("[INFO] Resize img to netpie... ")
     resize.resize_img("img/center.jpg","left")
