@@ -51,6 +51,25 @@ def load_image(df , path ):
             
     return np.array(images)
 
-
+def load_weight(_path):
+    for i in glob.glob(_path+"/*.csv"):
+        _path  = i
+    df = []
+    cols = []
+    with open(_path) as csvfile:
+        reader = csv.reader(csvfile)
+        count = 0 
+        for row in reader:
+            tmp = []
+            if(count == 0 ):
+                cols = row
+                count = 1
+            else:
+                for i in range(8):
+                    tmp.append(float(row[i]))
+                print(tmp)
+                df.append(tmp)      
+    return df,cols
+            
 
     

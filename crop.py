@@ -35,7 +35,7 @@ def crop_food (img = ""):
 					
 					crop1 =cv2.resize(crop1,(512,256))
 					crop2 =cv2.resize(crop2,(256,256))
-					crop2 =cv2.resize(crop3,(256,256))
+					crop3 =cv2.resize(crop3,(256,256))
 
 					cv2.imwrite("img/center.jpg",crop1)	
 					cv2.imwrite("img/left.jpg",crop2)	

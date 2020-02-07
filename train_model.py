@@ -21,8 +21,8 @@ import matplotlib.image as mpimg
 BATCH_SIZE = 5
 MAX_EPOCH = 200
 IMAGE_SIZE = (512,512)
-
-path_file = "crop/2019-10-04 Fried Noodles"
+food = "Cucumber Soup"
+path_file = "crop/2019-10-07 Cucumber Soup"
 print("[INFO] loading food attributes...")
 data_frame,col = datasets.load_attribute(path_file)
 data_frame = pd.DataFrame(data_frame,columns=col)
@@ -34,6 +34,10 @@ data_images = data_images /  255.0
 print("[INFO] Normolize working")
 num_max = data_frame[col[len(col)-1]].max()
 num_max = float(num_max)
+file_opject = open("models/"+food+"_max.txt","w") 
+file_opject.write(str(num_max))
+file_opject.close()
+
 
 print("[INFO] Normolize success")
 data_frame  = data_frame[col[1:len(col)]].div(num_max)
@@ -50,7 +54,6 @@ test_AttrX = testAttrX[col[len(col)-1]]
 test_AttrY = testAttrX[col[1:len(col)-1]]
 
 
-model = load_model('models/Fried Noodles.h5')
 mlp = models.create_mlp(1, regress=False)
 cnn = models.create_cnn(IMAGE_SIZE[0], IMAGE_SIZE[0], 3, regress=False)
 
@@ -60,16 +63,16 @@ last_output = Dense(3, activation="linear")(x)
 
 model = Model(inputs=[mlp.input,cnn.input], outputs=last_output)
 
-
+# model = load_model('2019-10-04 Fried Noodles.h5')
 opt = Adam(lr=1e-3, decay=1e-3 / 300)
 model.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)
 
 print(model.summary())
-print("[INFO] training model...")
 
-checkpoint = ModelCheckpoint('models/Fried Noodles.h5', verbose=1, monitor='val_accuracy',save_best_only=True, mode='max')
+print("[INFO] training model...")
+checkpoint = ModelCheckpoint('models/'+food+'.h5', verbose=1, monitor='val_accuracy',save_best_only=True, mode='max')
 
 h = model.fit(
     [train_AttrX,trainImageX], train_AttrY,
