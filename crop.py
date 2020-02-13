@@ -5,11 +5,11 @@ import numpy as np
 from skimage.transform import rescale, resize
 
 
-Pt1 = [(52, 20), (405, 239)] #กลาง
-Pt2 = [(232, 256), (407, 453)] #ซ้าย
-Pt3 = [(58, 258), (221, 454)] #ขวา
+Pt1 = [(52+80, 20+30), (405+80, 239+30)] #กลาง
+Pt2 = [(232+80, 256+30), (407+80, 453+30)] #ซ้าย
+Pt3 = [(58+80, 258+30), (221+80, 454+30)] #ขวา
 
-TARGET_SIZE = (640,480)
+TARGET_SIZE = (800,480)
 
 def crop_food (img = ""):
 	img = cv2.imread(img,cv2.IMREAD_COLOR)
@@ -47,5 +47,5 @@ def crop_food (img = ""):
 	cv2.destroyAllWindows()
 
 
-# crop_food("template.jpg")
+# crop_food("img/2019_12_03-fried_noodles-set_22-8.jpg")
 
