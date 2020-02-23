@@ -40,7 +40,7 @@ def main_function():
     print("[INFO] Crop image follow position...")
     crp.crop_food("img/2019_12_03-fried_noodles-set_22-8.jpg")
     print("[INFO] Predict weight from loadcell ...")
-    loadcell_w = [104,81,23,0]
+    loadcell_w = [122,19,0,103]
     print("Loadcell :",loadcell_w)
     # weight_all = weight.predicts_weight_from_loadcell(weight_all)[0]
     neuron_w = [110.25,102,4,6]

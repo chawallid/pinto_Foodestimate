@@ -52,24 +52,22 @@ def load_image(df , path ):
     return np.array(images)
 
 def load_weight(_path):
+    list_dataset = []
     for i in glob.glob(_path+"/*.csv"):
-        _path  = i
-    df = []
-    cols = []
-    with open(_path) as csvfile:
-        reader = csv.reader(csvfile)
-        count = 0 
-        for row in reader:
-            tmp = []
-            if(count == 0 ):
-                cols = row
-                count = 1
-            else:
-                for i in range(8):
-                    tmp.append(float(row[i]))
-                print(tmp)
-                df.append(tmp)      
-    return df,cols
-            
+        list_dataset.append(i)
+
+   
+    weight = ["left_sensor","top_sensor","right_sensor","left_total","top_total","right_total"]
+    data = pd.DataFrame(columns=weight)
+
+    # print(list_dataset[1])
+    for i in list_dataset :
+        print("load_weight from :", str(i))
+        read_data = pd.read_csv(str(i))
+        read_data = pd.DataFrame(read_data[weight], columns = weight)
+        data = data.append(read_data , ignore_index=True)
+
+    return data
+
 
     

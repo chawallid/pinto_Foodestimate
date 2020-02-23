@@ -13,7 +13,7 @@ from keras.models import Model
 def create_mlp(dim, regress=False):
 	# define our MLP network
 	model = Sequential()
-	model.add(Dense(4, input_dim=dim, activation="relu"))
+	model.add(Dense(3, input_dim=dim, activation="relu"))
 	model.add(Dense(4, activation="relu"))
 
 	# check to see if the regression node should be added

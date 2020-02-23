@@ -21,12 +21,13 @@ file_opject.close()
 
 mlp = load_model('models/'+food+'.h5')
 
-# W = [254,69,61,124]
+W = [105,39,0,66]
 def predicts_weight_from_loadcell(W = []):
     W = pd.DataFrame(W).T
     # print(W.shape)
     W = W.div(num_max)
     # print(W)
     preds = mlp.predict(W)
-    # print(preds * num_max)
+    print(preds * num_max)
     return preds*num_max
+predicts_weight_from_loadcell(W)

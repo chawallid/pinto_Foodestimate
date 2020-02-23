@@ -92,7 +92,7 @@ while True :
             # if (microgear.connect()):
         food1 = str(P1) + "," + str(C1)+ "," + str(L1) +"," + str(L)+","+str(P2) + "," + str(C2)+ "," + str(L2) +"," + str(R)+","+str(P3) + "," + str(C3)+ "," + str(L3) +"," + str(C)
         microgear.chat("detail",food1)
-        food2 = food_c+","+food_l+","+food_r+","+str(round(Loadcell_w[1],2))+","+str(Loadcell_w[2])+","+str(Loadcell_w[3])+","+str(Loadcell_w[0])+","+str(round(neuron_w[1],2))+","+str(neuron_w[2])+","+str(neuron_w[3])+","+str(round(neuron_w[0],2))
+        food2 = food_c+","+food_l+","+food_r+","+str(round(Loadcell_w[1],2))+","+str(Loadcell_w[2])+","+str(round(Loadcell_w[3],2))+","+str(Loadcell_w[0])+","+str(round(neuron_w[1],2))+","+str(neuron_w[2])+","+str(neuron_w[3])+","+str(round(neuron_w[0],2))
         microgear.chat("namefood",food2)
         total = 572.5 - ((P3*4)+(C3*4)+(L3*4))
         food3 = str(P3*4)+"kcal"+","+str(C3*4)+"kcal"+","+str(L3*4)+"kcal"+","+str((P3*4)+(C3*4)+(L3*4))+"kcal"+","+str(total)+"kcal"
