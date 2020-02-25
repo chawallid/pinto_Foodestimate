@@ -14,7 +14,12 @@ def create_mlp(dim, regress=False):
 	# define our MLP network
 	model = Sequential()
 	model.add(Dense(3, input_dim=dim, activation="relu"))
-	model.add(Dense(4, activation="relu"))
+	model.add(Dense(32, activation="relu"))
+	model.add(Dense(64, activation="relu"))
+	model.add(Dense(128, activation="relu"))
+	model.add(Dense(64, activation="relu"))
+	model.add(Dense(32, activation="relu"))
+
 
 	# check to see if the regression node should be added
 	if regress:
@@ -23,7 +28,7 @@ def create_mlp(dim, regress=False):
 	# return our model
 	return model
 
-def create_cnn(width, height, depth, filters=(16, 32, 64), regress=False):
+def create_cnn(width, height, depth, filters=(16, 32, 64 ,128), regress=False):
 	# initialize the input shape and channel dimension, assuming
 	# TensorFlow/channels-last ordering
 	inputShape = (height, width, depth)
@@ -54,7 +59,7 @@ def create_cnn(width, height, depth, filters=(16, 32, 64), regress=False):
 
 	# apply another FC layer, this one to match the number of nodes
 	# coming out of the MLP
-	x = Dense(4)(x)
+	x = Dense(8)(x)
 	x = Activation("relu")(x)
 
 	# check to see if the regression node should be added

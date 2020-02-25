@@ -12,8 +12,21 @@ from keras.optimizers import Adam
 import cv2
 import pandas as pd
 
-BATCH_SIZE = 10
-MAX_EPOCH = 20
+def write_data(line_ = 0 , file = "" , values = []):
+	file_opject = open("models/"+file+"_max.txt","w")
+# print(weight[0])
+# print(data_frame[weight[0]].max()) 
+	for i in range(line_):
+		data_write =  weight[i] +","+ str(values[weight[i]].max()) 
+		if(i >= line_ -1):
+			file_opject.write(data_write )
+		else :
+			file_opject.write(data_write + ",")
+	file_opject.close()	
+	return 0
+
+BATCH_SIZE = 25
+MAX_EPOCH = 1000
 namefile = "model_weight"
 path_file = "food"
 weight = ["left_sensor","top_sensor","right_sensor","left_total","top_total","right_total"]
@@ -24,11 +37,16 @@ print(data_frame)
 
 
 print("[INFO] Normolize working...")
-normolize = preprocessing.MinMaxScaler(feature_range = (0,1))
-data_frame = normolize.fit_transform(data_frame)
-print(data_frame)
+write_data(len(weight),namefile,data_frame)
+data_frame = data_frame / data_frame.max()
+
+# normolize = preprocessing.MinMaxScaler(feature_range = (0,1))
+# print(normolize.fit(data_frame))
+# print(normolize.data_max_)
+# data_frame = normolize.fit_transform(data_frame)
+
 # data_frame = normolize.inverse_transform(data_frame)
-# print(data_frame)
+#
 
 # num_max = data_frame[col[0]].max()
 # num_max = float(num_max)
@@ -36,18 +54,17 @@ print(data_frame)
 # file_opject.write(str(num_max))
 # file_opject.close()
 
-
-print("[INFO] Normolize success [OK]")
+print("[INFO] Normolize success !!! [OK]")
 # data_frame  = data_frame[col[0:len(col)]].div(num_max)
 # print(data_frame)
 
-print("[INFO] processing data...")
-split = train_test_split(data_frame,test_size=0.25 , random_state=42)
+print("[INFO] Split dataset to train and test ...")
+split = train_test_split(data_frame,test_size=0.25 , random_state= 30)
 (trainAttrX,testAttrX) = split
-
 
 trainAttrX = pd.DataFrame(trainAttrX , columns = weight)
 testAttrX = pd.DataFrame(testAttrX , columns = weight)
+
 # print(trainAttrX)
 #train
 train_AttrX = trainAttrX[weight[:3]]
@@ -58,27 +75,30 @@ train_AttrY = trainAttrX[weight[3:]]
 test_AttrX = testAttrX[weight[:3]]
 test_AttrY = testAttrX[weight[3:]]
 
-print(test_AttrX)
-print(test_AttrY)
+# print(test_AttrX)
+# print(test_AttrY)
 
 mlp = models.create_mlp(3, regress=False)
-mlp.add(Dense(8, activation="relu"))
-mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(8, activation="relu"))
+# mlp.add(Dense(16, activation="relu"))
 mlp.add(Dense(32, activation="relu"))
 mlp.add(Dense(64, activation="relu"))
+mlp.add(Dense(128, activation="relu"))
+mlp.add(Dense(256, activation="relu"))
+mlp.add(Dense(256, activation="relu"))
+mlp.add(Dense(128, activation="relu"))
 mlp.add(Dense(64, activation="relu"))
 mlp.add(Dense(32, activation="relu"))
-mlp.add(Dense(16, activation="relu"))
-
+# mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(8, activation="relu"))
 mlp.add(Dense(8, activation="relu"))
-mlp.add(Dense(4, activation="relu"))
 mlp.add(Dense(3, activation="linear"))
 
 # mlp = load_model('models/'+namefile+'.h5')
-# opt = Adam(lr=1e-3, decay=1e-3 / 300)
+opt = Adam(lr=1e-3, decay=1e-3 / 100.0)
 mlp.compile(loss="mean_squared_error",
             metrics=['accuracy'],
-            optimizer="adam")
+            optimizer=opt)
 
 print(mlp.summary())
 
@@ -96,11 +116,4 @@ plt.plot(h.history['accuracy'])
 plt.plot(h.history['val_accuracy'])
 plt.legend(['train', 'val'])
 plt.show()
-# list_w = []
-W = [[257,66,50]]
-W = normolize.fit_transform(W)
-print(W)
-W = pd.DataFrame(W).T
-print(W.shape)
-preds = mlp.predict(W)
-print(preds)
+
