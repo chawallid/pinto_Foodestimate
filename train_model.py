@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 top_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
-left_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
-right_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
+left_attribute = ["filename","left_total","left_liquid","left_veggie","left_meat"]
+right_attribute = ["filename","right_total","right_noodle","right_veggie","right_meat"]
 
 
 def write_data(line_ = 0 , file = "" , values = []):
@@ -26,7 +26,7 @@ def write_data(line_ = 0 , file = "" , values = []):
 # print(weight[0])
 # print(data_frame[weight[0]].max()) 
 	for i in range(line_):
-		data_write =  top_attribute[i+1] +","+ str(values[top_attribute[i+1]].max()) 
+		data_write =  left_attribute[i+1] +","+ str(values[left_attribute[i+1]].max()) 
 		if(i >= line_ -1):
 			file_opject.write(data_write )
 		else :
@@ -37,22 +37,31 @@ def write_data(line_ = 0 , file = "" , values = []):
 BATCH_SIZE = 5
 MAX_EPOCH = 350
 IMAGE_SIZE = (512,512)
-food = "fried_noodles"
-path_file = "food/fried_noodles"
+food = "napa_cabbage_soup"
+path_file = "food/napa_cabbage_soup"
 namefile = "model_"+food
 
-print("[INFO] loading food attributes...")
-data_frame = datasets.load_attribute(path_file)
+print("[INFO] loading food attributes... : " , end='')
+data_frame,position = datasets.load_attribute(path_file)
 # data_frame = pd.DataFrame(data_frame,columns=col)
 print("[INFO] loading food images...")
 data_images = datasets.load_image(data_frame["filename"] , path_file)
 data_images = data_images /  255.0
 
+
+if position == "top":
+	attribute = top_attribute
+elif position == "right":
+	attribute = right_attribute
+elif position == "left":
+	attribute = left_attribute
+
+
 print("[INFO] Normolize working")
-print(data_frame[top_attribute[1:]])
-write_data(len(top_attribute[1:]),namefile,data_frame[top_attribute[1:]])
-data_frame = data_frame[top_attribute[1:]] / data_frame[top_attribute[1:]].max()
-print(data_frame[top_attribute[1:]])
+print(data_frame[attribute[1:]])
+write_data(len(attribute[1:]),namefile,data_frame[attribute[1:]])
+data_frame = data_frame[attribute[1:]] / data_frame[attribute[1:]].max()
+print(data_frame[attribute[1:]])
 # num_max = data_frame[col[len(col)-1]].max()
 # num_max = float(num_max)
 # file_opject = open("models/"+food+"_max.txt","w") 
@@ -66,15 +75,15 @@ print("[INFO] processing data...")
 split = train_test_split(data_frame ,data_images ,test_size=0.2 , random_state=30)
 (trainAttrX,testAttrX, trainImageX,testImageX) = split
 
-trainAttrX = pd.DataFrame(trainAttrX , columns = top_attribute[1:])
-testAttrX = pd.DataFrame(testAttrX , columns = top_attribute[1:])
+trainAttrX = pd.DataFrame(trainAttrX , columns = attribute[1:])
+testAttrX = pd.DataFrame(testAttrX , columns = attribute[1:])
 
 #train
-train_AttrX = trainAttrX[top_attribute[1]]
-train_AttrY = trainAttrX[top_attribute[2:]]
+train_AttrX = trainAttrX[attribute[1]]
+train_AttrY = trainAttrX[attribute[2:]]
 #test
-test_AttrX = testAttrX[top_attribute[1]]
-test_AttrY = testAttrX[top_attribute[2:]]
+test_AttrX = testAttrX[attribute[1]]
+test_AttrY = testAttrX[attribute[2:]]
 
 
 mlp = models.create_mlp(1, regress=False)
@@ -87,7 +96,7 @@ last_output = Dense(3, activation="linear")(x)
 model = Model(inputs=[mlp.input,cnn.input], outputs=last_output)
 
 model = load_model('models/'+food+'.h5')
-opt = Adam(lr=1e-3, decay=1e-3 / 100)
+opt = Adam(lr=1e-3, decay=1e-3 / 200)
 model.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)

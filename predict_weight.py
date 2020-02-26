@@ -61,18 +61,20 @@ predict_err3 = []
 print(data_frame.loc[data_frame['left_total'] == data_frame["left_total"].min()])
 data_frame = data_frame.loc[data_frame['left_total'] == data_frame["left_total"].min()]
 list_index = data_frame.index.tolist()
-
+num  = 0
 for i in list_index :
     W_pred = [data_frame.T[i].T[weight[:3]][0],data_frame.T[i].T[weight[:3]][1],data_frame.T[i].T[weight[:3]][2]]
     W_true = [data_frame.T[i].T[weight[3:]][0],data_frame.T[i].T[weight[3:]][1],data_frame.T[i].T[weight[3:]][2]]
-    
+    pre_W = W_pred.copy()
     W_pred = predicts_weight_from_loadcell(W_pred)
     
     left_pred.append(W_pred.values.tolist()[0][0])
     predict_err1.append(W_pred.values.tolist()[0][0] - W_true[0])
     left_true.append(W_true[0])
-    print(i)
-    print(W_true,W_pred.values.tolist()[0][0])
+    # print(i)
+    if((W_pred.values.tolist()[0][0] - W_true[0]) > 5.0):
+        num += 1
+        print(i,":",pre_W,W_true,round(W_pred.values.tolist()[0][0],2),round(W_pred.values.tolist()[0][1],2),round(W_pred.values.tolist()[0][2],2))
 
     # top_pred.append(W_pred.values.tolist()[0][1])
     # predict_err2.append(W_pred.values.tolist()[0][1] - W_true[1])
@@ -82,14 +84,14 @@ for i in list_index :
     # right_true.append(W_true[2])
     
     
-
+print("data_error :",num)
 left_error = mean_absolute_error(left_true, left_pred)
 # top_error = mean_absolute_error(top_true , top_pred)
 # right_error = mean_absolute_error(right_true,right_pred)
 # print(left_true)
 # print(predict_err1)
-# plt.subplot(3, 1, 1)
-plt.title("Left MAE :" + str(left_error))
+plt.subplot(3, 1, 1)
+plt.title("Left MAE :" + str(round(left_error , 2)))
 plt.scatter(left_true, predict_err1, color='r')
 plt.xlabel('Actual weight [g]')
 plt.ylabel('Predict Error [g]')
@@ -115,11 +117,11 @@ plt.ylim(-1*(max(predict_err1)),max(predict_err1))
 
 # plt.xlim(0,max(right_true))
 # plt.ylim(-1*(max(predict_err3)),max(predict_err3))
-# plt.show()
+plt.show()
 
 
 
-print("left_error :", left_error)
-print("top_error :" , top_error)
-print("right_error :", right_error)
+# print("left_error :", left_error)
+# print("top_error :" , top_error)
+# print("right_error :", right_error)
     

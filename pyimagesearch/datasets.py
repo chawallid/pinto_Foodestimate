@@ -9,7 +9,7 @@ import csv
 
 weight = ["left_sensor","top_sensor","right_sensor","left_total","top_total","right_total"]
 top_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
-left_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
+left_attribute = ["filename","left_total","left_liquid","left_veggie","left_meat"]
 right_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
 
 def load_attribute(_path):
@@ -21,9 +21,9 @@ def load_attribute(_path):
     elif(read["position"][0] == "right"):
         pass
     elif(read["position"][0] == "left"):
-        pass
+        df =  read[left_attribute]
     # df = read
-    return df
+    return df,read["position"][0]
 
 def load_image(df , path ):
     images = [] 

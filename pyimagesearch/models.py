@@ -17,6 +17,7 @@ def create_mlp(dim, regress=False):
 	model.add(Dense(32, activation="relu"))
 	model.add(Dense(64, activation="relu"))
 	model.add(Dense(128, activation="relu"))
+	model.add(Dense(128, activation="relu"))
 	model.add(Dense(64, activation="relu"))
 	model.add(Dense(32, activation="relu"))
 
@@ -54,8 +55,8 @@ def create_cnn(width, height, depth, filters=(16, 32, 64 ,128), regress=False):
 	x = Flatten()(x)
 	x = Dense(16)(x)
 	x = Activation("relu")(x)
-	x = BatchNormalization(axis=chanDim)(x)
-	x = Dropout(0.5)(x)
+	# x = BatchNormalization(axis=chanDim)(x)
+	# x = Dropout(0.5)(x)
 
 	# apply another FC layer, this one to match the number of nodes
 	# coming out of the MLP
