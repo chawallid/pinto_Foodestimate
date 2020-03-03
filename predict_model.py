@@ -1,38 +1,35 @@
-from keras.models import Sequential , Model ,load_model
+from keras.models import load_model
 import numpy as np
 import cv2
 import pandas as pd
-from PIL import Image
 
-#---------------- setup ----------------
-IMAGE_SIZE = (512,512)
+def predict_model( weight= []  , im = "" , model_food = ""):
+    global nor,invest
 
-def predict_model( weight=0 , img = "" , model_food = ""):
-    print("weight",weight)
     file_opject =  open("models/"+model_food+"_max.txt","r")
-    num_max = float(file_opject.read())
+    num_max = file_opject.read()
     file_opject.close()
-    weight = float(weight / num_max)
-    # print("weight",weight)
+    list_data_max =  num_max.split(",")
+
+    max_data = []
+    i = 0 
+    while(i < len(list_data_max) ):
+        max_data.append(int(list_data_max[i+1]))
+        i = i+2
+
     model = load_model("models/"+model_food+".h5")
-    im = cv2.imread(img)
+        
+    nor = max_data[0]
+    invest = pd.DataFrame(max_data[1:]).T
+
+    weight = weight / nor
+    im = cv2.imread(im)
     im = cv2.resize(im,(512,512))
-    im = np.array(im/255.0)
-    # cv2.imshow(im)
-    atrr = [[weight]]
-    im = np.array([im])
-    attr = pd.DataFrame(atrr)
-    preds = model.predict([attr,im])
-    print("preds",preds)
-    preds[0][0] = preds[0][0] / 2
-    preds[0][1] = preds[0][1] / 4
-    preds[0][2] = preds[0][2] / 4
-    
-    return(preds)
+    im = np.asarray([im/255.0])
+    weight = [[weight]]
+    preds = model.predict([weight,im])
+    preds = preds * invest
+    del im,weight
+    return preds
 
 
-
-
-
-    
-    

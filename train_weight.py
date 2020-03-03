@@ -17,7 +17,7 @@ def write_data(line_ = 0 , file = "" , values = []):
 # print(weight[0])
 # print(data_frame[weight[0]].max()) 
 	for i in range(line_):
-		data_write =  weight[i] +","+ str(values[weight[i]].max()) 
+		data_write =  weight[i] +","+ str(float(values[weight[i]].max())) 
 		if(i >= line_ -1):
 			file_opject.write(data_write )
 		else :
@@ -26,7 +26,7 @@ def write_data(line_ = 0 , file = "" , values = []):
 	return 0
 
 BATCH_SIZE = 30
-MAX_EPOCH = 500
+MAX_EPOCH = 1000
 namefile = "model_weight"
 path_file = "food"
 
@@ -60,7 +60,7 @@ print("[INFO] Normolize success !!! [OK]")
 # print(data_frame)
 
 print("[INFO] Split dataset to train and test ...")
-split = train_test_split(data_frame,test_size=0.2 , random_state= 33)
+split = train_test_split(data_frame,test_size=0.2 , random_state= 100)
 (trainAttrX,testAttrX) = split
 
 trainAttrX = pd.DataFrame(trainAttrX , columns = weight)
@@ -116,12 +116,12 @@ mlp.add(Dense(64, activation="relu"))
 mlp.add(Dense(32, activation="relu"))
 mlp.add(Dense(32, activation="relu"))
 
-mlp.add(Dense(8, activation="relu"))
-mlp.add(Dense(8, activation="relu"))
+mlp.add(Dense(16, activation="relu"))
+mlp.add(Dense(16, activation="relu"))
 mlp.add(Dense(3, activation="linear"))
 
 mlp = load_model('models/'+namefile+'.h5')
-opt = Adam(lr=1e-4, decay=1e-4 / 100.0)
+opt = Adam(lr=1e-3, decay=1e-3 / 100.0)
 mlp.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)

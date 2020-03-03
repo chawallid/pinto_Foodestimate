@@ -38,7 +38,7 @@ def main_function():
     print("[INFO] Take photo...")
 
     print("[INFO] Crop image follow position...")
-    crp.crop_food("img/2019_12_03-fried_noodles-set_22-8.jpg")
+    # crp.crop_food("img/2019_12_03-fried_noodles-set_22-8.jpg")
     print("[INFO] Predict weight from loadcell ...")
     loadcell_w = [122,19,0,103]
     print("Loadcell :",loadcell_w)
@@ -60,18 +60,18 @@ def main_function():
 
     print("[INFO] Split photo for predict model...")
     if( class_C != "empty"):
-        C = pred_weight.predict_model(neuron_w[0],"img/center.jpg",class_C)[0]
+        C = pred_weight.predict_model(neuron_w[0],"center.jpg",class_C)[0]
     else :
         C = [0,0,0]
     if( class_L != "empty"):
-        L = pred_weight.predict_model(neuron_w[0],"img/left.jpg",class_L)[0]
+        L = pred_weight.predict_model(neuron_w[1],"left.jpg",class_L)[0]
     else :
         L = [0,0,0]
     if( class_R != "empty"):
-        R = pred_weight.predict_model(neuron_w[0],"img/right.jpg",class_R)[0]
+        R = pred_weight.predict_model(neuron_w[2],"right.jpg",class_R)[0]
     else :
         R = [0,0,0]
-    # print("GGGG :", C)
+    print("GGGG :", C)
     img_R = "img/right.jpg"
     img_C = "img/center.jpg" 
     img_L = "img/left.jpg"

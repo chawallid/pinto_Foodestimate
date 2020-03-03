@@ -37,6 +37,13 @@ def load_image(df , path ):
             
     return np.array(images)
 
+def load_namepic(df , path ):
+    image = []
+    for i in df :
+        base_Path = path + "/" + i
+        image.append(base_Path)
+    return image
+
 def load_weight(_path):
     list_dataset = []
     for i in glob.glob(_path+"/*.csv"):

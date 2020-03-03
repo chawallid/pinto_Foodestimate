@@ -1,1 +1,1 @@
-left_sensor,120,top_sensor,387,right_sensor,111,left_total,128,top_total,414,right_total,133
+left_sensor,100.0,top_sensor,377.0,right_sensor,102.0,left_total,128.0,top_total,414.0,right_total,133.0

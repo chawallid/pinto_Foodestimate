@@ -26,7 +26,7 @@ def write_data(line_ = 0 , file = "" , values = []):
 # print(weight[0])
 # print(data_frame[weight[0]].max()) 
 	for i in range(line_):
-		data_write =  left_attribute[i+1] +","+ str(values[left_attribute[i+1]].max()) 
+		data_write =  attribute[i+1] +","+ str(values[attribute[i+1]].max()) 
 		if(i >= line_ -1):
 			file_opject.write(data_write )
 		else :
@@ -35,10 +35,10 @@ def write_data(line_ = 0 , file = "" , values = []):
 	return 0
 
 BATCH_SIZE = 5
-MAX_EPOCH = 350
+MAX_EPOCH = 500
 IMAGE_SIZE = (512,512)
-food = "napa_cabbage_soup"
-path_file = "food/napa_cabbage_soup"
+food = "fried_noodles"
+path_file = "food/"+food
 namefile = "model_"+food
 
 print("[INFO] loading food attributes... : " , end='')
@@ -90,13 +90,16 @@ mlp = models.create_mlp(1, regress=False)
 cnn = models.create_cnn(IMAGE_SIZE[0], IMAGE_SIZE[1], 3, regress=False)
 
 combinedInput = concatenate([mlp.output, cnn.output])
-x = Dense(4, activation="relu")(combinedInput)
+x = Dense(32, activation="relu")(combinedInput)
+x = Dense(64, activation="relu")(x)
+x = Dense(32, activation="relu")(x)
+x = Dense(16, activation="relu")(x)
 last_output = Dense(3, activation="linear")(x)
 
 model = Model(inputs=[mlp.input,cnn.input], outputs=last_output)
 
 model = load_model('models/'+food+'.h5')
-opt = Adam(lr=1e-3, decay=1e-3 / 200)
+opt = Adam(lr=1e-3, decay=1e-3 / 300)
 model.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)
