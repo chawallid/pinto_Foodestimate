@@ -37,7 +37,8 @@ def write_data(line_ = 0 , file = "" , values = []):
 BATCH_SIZE = 5
 MAX_EPOCH = 500
 IMAGE_SIZE = (512,512)
-food = "fried_noodles"
+
+food = "napa_cabbage_soup"
 path_file = "food/"+food
 namefile = "model_"+food
 

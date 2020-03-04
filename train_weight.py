@@ -121,7 +121,7 @@ mlp.add(Dense(16, activation="relu"))
 mlp.add(Dense(3, activation="linear"))
 
 mlp = load_model('models/'+namefile+'.h5')
-opt = Adam(lr=1e-3, decay=1e-3 / 100.0)
+opt = Adam(lr=1e-4, decay=1e-4 / 300.0)
 mlp.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)
