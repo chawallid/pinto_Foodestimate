@@ -26,10 +26,10 @@ import itertools
 import collections
 from collections import defaultdict
 import crop as crop
-import predict_model as pred_weight
+import predict_model as pred_model
 import predict_food as pred_class
 import resize_to_netpie as resize
-import predict_weight as cal
+import predict_weight as pred_weight
 
 EMULATE_HX711=False
 state = True
@@ -132,12 +132,15 @@ firebase = pyrebase.initialize_app(config)
 store = firebase.storage()
 
 print("INFO : Connecting Netpie !!!")
+
 appid = "SendPic"
-gearkey = "ZlLVTgx1SCXW1xJ"
-gearsecret =  "E4gnN6yKtdG0DC8WWDDFnhR5q"
+gearkey = "5kiUuISZVKUTAQX"
+gearsecret =  "hHo1bpmB02SIMl1h5uRXhRepB"
+
 microgear.create(gearkey,gearsecret,appid,{'debugmode': True})
 
 weight_list = []
+neuron_weight = []
 #########3main ###########3
 while True:
     ret,im =cap.read()
@@ -153,7 +156,8 @@ while True:
     
     #print(val_lelf,val_mid,val_rigth)    
     #print('buttonState',button_state)
-    
+    weight_list.clear()
+
     if cv2.waitKey(1) &button_state == 1:
     #if cv2.waitKey(1) & buttom_state == GPIO.HIGH :
         print('start system.....')
@@ -163,14 +167,18 @@ while True:
                   'sensor rigth':[val_rigth],}
         
         crop.crop_food(im)
-        #weight_list.append(val_lelf+val_mid+val_rigth)
-        #weight_list.append(val_lelf)
-        #weight_list.append(val_rigth)
-        #weight_list.append(val_mid)
+        # weight_list.append(val_lelf+val_mid+val_rigth)
+        weight_list.append(val_lelf)
+        weight_list.append(val_rigth)
+        weight_list.append(val_mid)
         
         print("[INFO] calculator weight .. ")
-        #weight_list = cal.weight(weight_list)
-        print(val_lelf,val_mid,val_rigth)
+        print("input :" , weight_list)
+
+        neuron_weight = pred_weight.predicts_weight_from_loadcell(weight_list)
+
+        print("output :" , weight_list)
+        # print(val_lelf,val_mid,val_rigth)
         #######output img/
         ########### predict ###################
         print("[INFO] Split photo for predict food...")
@@ -182,21 +190,24 @@ while True:
         #class_R = "Cucumber Soup"   
 
         class_C = "empty"
-        class_L = "egg-soup" 
+        class_L = "empty" 
         class_R = "empty"
 
         print("[INFO] Split photo for predict model...")
         if( class_C != "empty"):
-            C = pred_weight.predict_model(val_mid,"img/center.jpg",class_C)[0]
+            C = pred_model.predict_model(neuron_weight[2],"img/center.jpg",class_C)[0]
+            print(C)
+
         else :
             C = [0,0,0]
         if( class_L != "empty"):
-            L = pred_weight.predict_model(val_lelf,"img/left.jpg",class_L)[0]
-            print(L)
+            L = pred_model.predict_model(neuron_weight[0],"img/left.jpg",class_L)[0]
+            # print(L)
         else :
             L = [0,0,0]
         if( class_R != "empty"):
-            R = pred_weight.predict_model(val_rigth,"img/right.jpg",class_R)[0]
+            R = pred_model.predict_model(neuron_weight[1],"img/right.jpg",class_R)[0]
+        
         else :
             R = [0,0,0]
             
@@ -205,6 +216,7 @@ while True:
         img_L = "img/left.jpg"
 
         print("[INFO] Resize img to netpie... ")
+
         resize.resize_img("img/center.jpg","left")
         resize.resize_img("img/left.jpg","right")
         resize.resize_img("img/right.jpg","center")
@@ -245,8 +257,9 @@ while True:
         R = url_R + "&token=d28ba572-312b-468e-a234-354b96d14319"
         C = url_C + "&token=0b0a32a9-1a00-43c0-a665-19058365ff14"
         
-        food1 = str(P1) + "," + str(C1)+ "," + str(L1) +"," + str(L)+","+str(P2) + "," + str(C2)+ "," + str(L2) +"," + str(R)+","+str(P3) + "," + str(C3)+ "," + str(L3) +"," + str(C)
-        microgear.chat("a",food1)
+        # [โปรตีน] [คาร์โบไฮเดรต] [น้ำ] [รูปภาพ] [น้ำหนักจาก NN] [น้ำหนักจาก LC] 
+        food_centor = str(P3) + "," + str(C3)+ "," + str(L3) +"," + str(C)+"," +str(neuron_weight[2])+"," +str(weight_list[2])
+        microgear.chat("a",food_centor)
         time.sleep(10)
         microgear.on_disconnect = disconnect
         microgear.disconnect()

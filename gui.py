@@ -80,7 +80,6 @@ class StartPage(tk.Frame):
 
         button1.pack()
         button2.pack()
-
         button3.pack(side="right")
 
 

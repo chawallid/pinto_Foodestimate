@@ -37,6 +37,8 @@ def predicts_weight_from_loadcell(W = []):
     #calculater W 
     W = ( W / normal )
 
+    mlp = load_model("models/"+namefile+".h5")
+
     #predict weight 
     preds = mlp.predict(W.T)
 
