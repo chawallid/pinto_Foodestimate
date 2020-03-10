@@ -42,7 +42,7 @@ store.child("food/rigth.jpe").put(img_R)
 store.child("food/center.jpe").put(img_C)
 
 url_L = store.child("food/left.jpe").get_url(None)
-url_R = store.child("food/rigth.jpe").get_url(None)
+url_R = store.child("food/right.jpe").get_url(None)
 url_C = store.child("food/center.jpe").get_url(None)
 print("INFO : Upload Success !!!")
 
@@ -77,12 +77,7 @@ while True :
     cv2.imshow("image", image)
     key = cv2.waitKey(1) & 0xFF
     if key == ord("s"):
-        # microgear.setalias("a")
-        # microgear.on_connect = connection
-        # microgear.on_message = subscription
-        # microgear.subscribe("/mails")
-        # microgear.connect()
-
+        
         #token_firebase
         L = url_L + "&token=28ef2706-806f-4699-afe1-ff737ac9b4da"
         R = url_R + "&token=d28ba572-312b-468e-a234-354b96d14319"

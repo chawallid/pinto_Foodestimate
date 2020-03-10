@@ -178,8 +178,7 @@ while True:
         neuron_weight = pred_weight.predicts_weight_from_loadcell(weight_list)
 
         print("output :" , weight_list)
-        # print(val_lelf,val_mid,val_rigth)
-        #######output img/
+        
         ########### predict ###################
         print("[INFO] Split photo for predict food...")
         #class_C = pred_class.predict_food_class("img/center.jpg")

@@ -71,7 +71,7 @@ def main_function():
         R = pred_weight.predict_model(neuron_w[2],"right.jpg",class_R)[0]
     else :
         R = [0,0,0]
-    print("GGGG :", C)
+    # print("GGGG :", C)
     img_R = "img/right.jpg"
     img_C = "img/center.jpg" 
     img_L = "img/left.jpg"

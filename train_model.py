@@ -38,7 +38,7 @@ BATCH_SIZE = 5
 MAX_EPOCH = 500
 IMAGE_SIZE = (512,512)
 
-food = "napa_cabbage_soup"
+food = "fried_noodles"
 path_file = "food/"+food
 namefile = "model_"+food
 

@@ -22,8 +22,8 @@ def shape_selection(event, x, y, flags, param):
     cv2.rectangle(image, ref_point[0], ref_point[1], (0, 255, 0), 2)
     cv2.imshow("image", image)
 
-name_folder = "2019-11-04 rice"
-food = "original_pic/"+name_folder
+name_folder = "2020_03_03-fried_noodles"
+food = "food/"+name_folder
 
 for file_name in glob.glob(food + "/*.jpg"):
 	list_pic.append(file_name)
@@ -47,7 +47,7 @@ while True:
 		for j in range(len(name_file)):
 			image = cv2.imread(list_pic[j], cv2.COLOR_BGR2HSV)
 			crop_img = clone[ref_point[0][1]:ref_point[1][1], ref_point[0][0]:ref_point[1][0]]
-			cv2.imwrite("crop/"+name_folder+"/"+name_file[j]+".jpg",crop_img)	
+			cv2.imwrite("food/"+name_folder+"/"+name_file[j]+".jpg",crop_img)	
 			print(name_file[j]+ " is saved !")
 		cv2.waitKey(0)
 		cv2.destroyAllWindows()

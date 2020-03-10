@@ -10,7 +10,7 @@ import pandas as pd
 
 #---------------- setup ----------------
 IMAGE_SIZE = (512,512)
-food = "napa_cabbage_soup"
+food = "fried_noodles"
 path_file = "food/"+food
 namefile = "model_"+food
 
