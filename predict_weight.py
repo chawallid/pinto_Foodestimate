@@ -46,7 +46,7 @@ def predicts_weight_from_loadcell(W = []):
     return preds * invest.T
 
 
-
+print(predicts_weight_from_loadcell([0,26,1]))
 
 
 

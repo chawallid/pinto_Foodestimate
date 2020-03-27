@@ -36,10 +36,16 @@ print("[INFO] loading weight attributes...")
 data_frame = datasets.load_weight(path_file)
 print(data_frame)
 
+print("[INFO] loading weight attributes remove dubplicate...")
+data_frame = data_frame.drop_duplicates()
+print(data_frame)
 
 print("[INFO] Normolize working...")
 write_data(len(weight),namefile,data_frame)
+
+# print(data_frame.max())
 data_frame = data_frame / data_frame.max()
+
 
 # normolize = preprocessing.MinMaxScaler(feature_range = (0,1))
 # print(normolize.fit(data_frame))
@@ -47,7 +53,7 @@ data_frame = data_frame / data_frame.max()
 # data_frame = normolize.fit_transform(data_frame)
 
 # data_frame = normolize.inverse_transform(data_frame)
-#
+
 
 # num_max = data_frame[col[0]].max()
 # num_max = float(num_max)
@@ -121,7 +127,7 @@ mlp.add(Dense(16, activation="relu"))
 mlp.add(Dense(3, activation="linear"))
 
 mlp = load_model('models/'+namefile+'.h5')
-opt = Adam(lr=1e-3, decay=1e-3 / 100.0)
+opt = Adam(lr=1e-4, decay=1e-3 / 100.0)
 mlp.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)

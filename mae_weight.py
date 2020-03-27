@@ -54,34 +54,39 @@ predict_err3 = []
 
 
 list_index = data_frame.index.tolist()
+# list_index = range(0,100)
+count = 0 
 
 for i in list_index :
+    if(count > 100 ):
+        break
     W_pred = [data_frame.T[i].T[weight[:3]][0],data_frame.T[i].T[weight[:3]][1],data_frame.T[i].T[weight[:3]][2]]
     W_true = [data_frame.T[i].T[weight[3:]][0],data_frame.T[i].T[weight[3:]][1],data_frame.T[i].T[weight[3:]][2]]
     
     print("W_true :",W_true)
-    # W_pred = predicts_weight_from_loadcell(W_pred)
-    # print("W_pred :",W_pred.values.tolist()[0][0],W_pred.values.tolist()[0][1],W_pred.values.tolist()[0][2])
-    print("W_pred :",W_pred)
+    W_pred = predicts_weight_from_loadcell(W_pred)
+    print("W_pred :",W_pred.values.tolist()[0][0],W_pred.values.tolist()[0][1],W_pred.values.tolist()[0][2])
+    # print("W_pred :",W_pred)
     
-    # left_pred.append(W_pred.values.tolist()[0][0])
-    # predict_err1.append(W_pred.values.tolist()[0][0] - W_true[0])
-    left_pred.append(W_pred[0])
-    predict_err1.append(W_pred[0] - W_true[0])
+    left_pred.append(W_pred.values.tolist()[0][0])
+    predict_err1.append(W_pred.values.tolist()[0][0] - W_true[0])
+    # left_pred.append(W_pred[0])
+    # predict_err1.append(W_pred[0] - W_true[0])
     left_true.append(W_true[0])
     print("records : " , i)
 
-    # top_pred.append(W_pred.values.tolist()[0][1])
-    # predict_err2.append(W_pred.values.tolist()[0][1] - W_true[1])
-    top_pred.append(W_pred[1])
-    predict_err2.append(W_pred[1] - W_true[1])
+    top_pred.append(W_pred.values.tolist()[0][1])
+    predict_err2.append(W_pred.values.tolist()[0][1] - W_true[1])
+    # top_pred.append(W_pred[1])
+    # predict_err2.append(W_pred[1] - W_true[1])
     top_true.append(W_true[1])
 
-    # right_pred.append(W_pred.values.tolist()[0][2])
-    # predict_err3.append(W_pred.values.tolist()[0][2] - W_true[2])
-    right_pred.append(W_pred[2])
-    predict_err3.append(W_pred[2] - W_true[2])
+    right_pred.append(W_pred.values.tolist()[0][2])
+    predict_err3.append(W_pred.values.tolist()[0][2] - W_true[2])
+    # right_pred.append(W_pred[2])
+    # predict_err3.append(W_pred[2] - W_true[2])
     right_true.append(W_true[2])
+    count = count+1
     
     
 
