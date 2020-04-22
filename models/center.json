@@ -1,0 +1,308 @@
+{
+ "version": "application/octet-stream",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "title": "Center",
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1
+   },
+   "col": {
+    "3": 1,
+    "4": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[11]",
+      "refresh": 60
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/namefood\"].split(\",\")[0]",
+      "sparkline": false,
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "title": "คาร์โบไฮเดรต",
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1
+   },
+   "col": {
+    "3": 2,
+    "4": 2
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "title": "",
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[8]",
+      "min_value": 0,
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[0]"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "title": "ผัก",
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1
+   },
+   "col": {
+    "3": 3,
+    "4": 3
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "title": "",
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[9]",
+      "min_value": 0,
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[1]"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "title": "โปรตีน",
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1
+   },
+   "col": {
+    "3": 3,
+    "4": 4
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "title": "",
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[10]",
+      "min_value": 0,
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "datasources[\"namefood\"][\"/SendPic/gearname/detail\"].split(\",\")[2]"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 13
+   },
+   "col": {
+    "3": 3,
+    "4": 4
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "รวมพลังงานทั้งหมดที่รับประทาน",
+      "size": "regular",
+      "value": "datasources[\"total\"][\"/SendPic/gearname/total\"].split(\",\")[4]",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 13,
+    "4": 13
+   },
+   "col": {
+    "3": 1,
+    "4": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "size": "regular",
+      "value": "Loadcell Weigh :",
+      "animate": true
+     }
+    },
+    {
+     "type": "gauge",
+     "settings": {
+      "title": "",
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/namefood\"].split(\",\")[3]",
+      "min_value": 0,
+      "max_value": "300"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 13,
+    "4": 13
+   },
+   "col": {
+    "3": 2,
+    "4": 2
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "value": "Neuron Estimate:",
+      "sparkline": false,
+      "animate": true
+     }
+    },
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "datasources[\"namefood\"][\"/SendPic/gearname/namefood\"].split(\",\")[10]",
+      "min_value": 0,
+      "max_value": "300"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Calories Calculator",
+   "width": 1,
+   "row": {
+    "3": 13,
+    "4": 13
+   },
+   "col": {
+    "3": 3,
+    "4": 3
+   },
+   "col_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "คาร์โบไฮเดรต",
+      "size": "regular",
+      "value": "datasources[\"total\"][\"/SendPic/gearname/total\"].split(\",\")[0]",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "ผัก",
+      "size": "regular",
+      "value": "datasources[\"total\"][\"/SendPic/gearname/total\"].split(\",\")[1]",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "โปรตีน",
+      "size": "regular",
+      "value": "datasources[\"total\"][\"/SendPic/gearname/total\"].split(\",\")[2]",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "คงเหลือ",
+      "size": "regular",
+      "value": "datasources[\"total\"][\"/SendPic/gearname/total\"].split(\",\")[3]",
+      "animate": true
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "detail",
+   "type": "netpie_microgear",
+   "settings": {
+    "name": "detail",
+    "appid": "SendPic",
+    "key": "5kiUuISZVKUTAQX",
+    "secret": "hHo1bpmB02SIMl1h5uRXhRepB",
+    "topics": "/#"
+   }
+  },
+  {
+   "name": "namefood",
+   "type": "netpie_microgear",
+   "settings": {
+    "name": "namefood",
+    "appid": "SendPic",
+    "key": "5kiUuISZVKUTAQX",
+    "secret": "hHo1bpmB02SIMl1h5uRXhRepB",
+    "topics": "/#"
+   }
+  },
+  {
+   "name": "total",
+   "type": "netpie_microgear",
+   "settings": {
+    "name": "total",
+    "appid": "SendPic",
+    "key": "5kiUuISZVKUTAQX",
+    "secret": "hHo1bpmB02SIMl1h5uRXhRepB",
+    "topics": "/#"
+   }
+  }
+ ],
+ "columns": 4,
+ "theme": "default"
+}

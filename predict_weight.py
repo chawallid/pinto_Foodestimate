@@ -40,13 +40,14 @@ def predicts_weight_from_loadcell(W = []):
     mlp = load_model("models/"+namefile+".h5")
 
     #predict weight 
+    print(W)
     preds = mlp.predict(W.T)
 
     #return values and invest to true values
     return preds * invest.T
 
 
-print(predicts_weight_from_loadcell([0,26,1]))
+print(predicts_weight_from_loadcell([47,37,0]))
 
 
 

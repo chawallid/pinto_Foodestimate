@@ -25,8 +25,8 @@ def write_data(line_ = 0 , file = "" , values = []):
 	file_opject.close()	
 	return 0
 
-BATCH_SIZE = 30
-MAX_EPOCH = 1000
+BATCH_SIZE = 50
+MAX_EPOCH = 300
 namefile = "model_weight"
 path_file = "food"
 
@@ -66,7 +66,7 @@ print("[INFO] Normolize success !!! [OK]")
 # print(data_frame)
 
 print("[INFO] Split dataset to train and test ...")
-split = train_test_split(data_frame,test_size=0.2 , random_state= 100)
+split = train_test_split(data_frame,test_size=0.25 , random_state= 250)
 (trainAttrX,testAttrX) = split
 
 trainAttrX = pd.DataFrame(trainAttrX , columns = weight)
@@ -86,48 +86,51 @@ test_AttrY = testAttrX[weight[3:]]
 # print(test_AttrY)
 
 mlp = models.create_mlp(3, regress=False)
-mlp.add(Dense(16, activation="relu"))
-mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(16, activation="relu"))
 
-mlp.add(Dense(32, activation="relu"))
-mlp.add(Dense(32, activation="relu"))
+# mlp.add(Dense(32, activation="relu"))
+# mlp.add(Dense(32, activation="relu"))
 
-mlp.add(Dense(64, activation="relu"))
-mlp.add(Dense(64, activation="relu"))
+# mlp.add(Dense(64, activation="relu"))
+# mlp.add(Dense(64, activation="relu"))
 
-mlp.add(Dense(128, activation="relu"))
-mlp.add(Dense(128, activation="relu"))
+# mlp.add(Dense(128, activation="relu"))
+# mlp.add(Dense(128, activation="relu"))
 
-mlp.add(Dense(256, activation="relu"))
-mlp.add(Dense(256, activation="relu"))
-
-mlp.add(Dense(512, activation="relu"))
-mlp.add(Dense(512, activation="relu"))
-
-mlp.add(Dense(1028, activation="relu"))
-mlp.add(Dense(1028, activation="relu"))
+# mlp.add(Dense(256, activation="relu"))
+# mlp.add(Dense(256, activation="relu"))
 
 mlp.add(Dense(512, activation="relu"))
 mlp.add(Dense(512, activation="relu"))
 
-mlp.add(Dense(256, activation="relu"))
-mlp.add(Dense(256, activation="relu"))
+mlp.add(Dense(1024, activation="relu"))
+mlp.add(Dense(1024, activation="relu"))
 
-mlp.add(Dense(128, activation="relu"))
-mlp.add(Dense(128, activation="relu"))
+mlp.add(Dense(1024, activation="relu"))
+mlp.add(Dense(1024, activation="relu"))
 
-mlp.add(Dense(64, activation="relu"))
-mlp.add(Dense(64, activation="relu"))
+mlp.add(Dense(512, activation="relu"))
+mlp.add(Dense(512, activation="relu"))
 
-mlp.add(Dense(32, activation="relu"))
-mlp.add(Dense(32, activation="relu"))
+# mlp.add(Dense(256, activation="relu"))
+# mlp.add(Dense(256, activation="relu"))
 
-mlp.add(Dense(16, activation="relu"))
-mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(128, activation="relu"))
+# mlp.add(Dense(128, activation="relu"))
+
+# mlp.add(Dense(64, activation="relu"))
+# mlp.add(Dense(64, activation="relu"))
+
+# mlp.add(Dense(32, activation="relu"))
+# mlp.add(Dense(32, activation="relu"))
+
+# mlp.add(Dense(16, activation="relu"))
+# mlp.add(Dense(16, activation="relu"))
 mlp.add(Dense(3, activation="linear"))
 
-mlp = load_model('models/'+namefile+'.h5')
-opt = Adam(lr=1e-4, decay=1e-3 / 100.0)
+# mlp = load_model('models/'+namefile+'.h5')
+opt = Adam(lr=1e-3, decay=1e-3 / 300.0)
 mlp.compile(loss="mean_squared_error",
             metrics=['accuracy'],
             optimizer=opt)

@@ -1,20 +1,23 @@
-from keras.models import Sequential , Model ,load_model
-from keras.layers import Dense, Flatten, Input ,Dropout, Activation, concatenate
-from keras.layers import Conv2D, MaxPooling2D
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.models import Sequential , Model ,load_model
+from tensorflow.keras.layers import Dense, Flatten, Input ,Dropout, Activation, concatenate
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from pyimagesearch import datasets
 from pyimagesearch import models
-from keras.callbacks import ModelCheckpoint
+from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 import numpy as np
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 import cv2
 import pandas as pd
 from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import tensorflow as tf
+gpus= tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
 top_attribute = ["filename","top_total","top_noodle","top_veggie","top_meat"]
 left_attribute = ["filename","left_total","left_liquid","left_veggie","left_meat"]
@@ -99,7 +102,7 @@ last_output = Dense(3, activation="linear")(x)
 
 model = Model(inputs=[mlp.input,cnn.input], outputs=last_output)
 
-model = load_model('models/'+food+'.h5')
+# model = load_model('models/'+food+'.h5')/
 opt = Adam(lr=1e-3, decay=1e-3 / 300)
 model.compile(loss="mean_squared_error",
             metrics=['accuracy'],

@@ -1,0 +1,47 @@
+{
+ "version": "application/octet-stream",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "title": "detail food each channel",
+   "width": 1,
+   "row": {
+    "4": 1
+   },
+   "col": {
+    "4": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "Button",
+     "settings": {
+      "caption": "right channel",
+      "color": "red",
+      "onClick": "// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources[\"MyDatasource\"].sensor.tempInF * 1.8 + 32).toFixed(2);\nwindow.open(\"https://2015.netpie.io/freeboard/rightchannel\")\n"
+     }
+    },
+    {
+     "type": "Button",
+     "settings": {
+      "caption": "left channel",
+      "color": "green",
+      "onClick": "// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources[\"MyDatasource\"].sensor.tempInF * 1.8 + 32).toFixed(2);\nwindow.open(\"https://2015.netpie.io/freeboard/leftchannel\");\n"
+     }
+    },
+    {
+     "type": "Button",
+     "settings": {
+      "caption": "center channel",
+      "color": "blue",
+      "onClick": "// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources[\"MyDatasource\"].sensor.tempInF * 1.8 + 32).toFixed(2);\nwindow.open(\"https://2015.netpie.io/freeboard/centerchannel\");\n"
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [],
+ "columns": 4,
+ "theme": "default"
+}

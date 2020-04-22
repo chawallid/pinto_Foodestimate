@@ -1,0 +1,254 @@
+{
+ "version": "application/octet-stream",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "title": "center",
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1
+   },
+   "col": {
+    "3": 1,
+    "4": 1
+   },
+   "col_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "name food",
+      "size": "regular",
+      "value": "datasources[\"right\"][\"/SendPic/gearname/namefood\"].split(\",\")[2]",
+      "sparkline": false,
+      "animate": true
+     }
+    },
+    {
+     "type": "picture",
+     "settings": {
+      "src": "datasources[\"right\"][\"/SendPic/gearname/detail_center\"].split(\",\")[3]",
+      "refresh": 60
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1
+   },
+   "col": {
+    "4": 2
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "97",
+      "units": "g",
+      "min_value": "0",
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "0"
+      ],
+      "include_legend": false,
+      "legend": ""
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1
+   },
+   "col": {
+    "4": 3
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "8.32",
+      "units": "g",
+      "min_value": 0,
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "0"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1
+   },
+   "col": {
+    "4": 4
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "4.2",
+      "units": "g",
+      "min_value": 0,
+      "max_value": "150"
+     }
+    },
+    {
+     "type": "sparkline",
+     "settings": {
+      "value": [
+       "0"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 13
+   },
+   "col": {
+    "4": 4
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "พลังงานทั้งหมด",
+      "size": "regular",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "พลังงานที่ได้รับ",
+      "size": "regular",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 13
+   },
+   "col": {
+    "4": 2
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "110.25",
+      "min_value": 0,
+      "max_value": "350"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 13
+   },
+   "col": {
+    "4": 3
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "โปรตีน",
+      "size": "regular",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "คาร์โบไฮเดรต",
+      "size": "regular",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "ไขมัน",
+      "size": "regular",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 13
+   },
+   "col": {
+    "4": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "81",
+      "min_value": 0,
+      "max_value": "350"
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "right",
+   "type": "netpie_microgear",
+   "settings": {
+    "name": "right",
+    "appid": "SendPic",
+    "key": "kU9mV0WBj9ROypr",
+    "secret": "vnbG59F65Shj7M3eNKaERevgG",
+    "topics": "/#"
+   }
+  }
+ ],
+ "columns": 4,
+ "theme": "default"
+}
